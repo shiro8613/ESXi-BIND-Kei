@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"log"
 	"os"
+	"net"
 	"strconv"
 
 	"github.com/miekg/dns"
@@ -24,6 +25,17 @@ func parseQuery(m *dns.Msg, records map[string]string) {
 		case dns.TypeA:
 			log.Printf("Query for %s\n", q.Name)
 			ip := records[q.Name]
+
+			if ip == "" {
+				addr, err := net.ResolveIPAddr("ip", q.Name)
+				if err != nil {
+					log.Printf("EROR", err)
+				}
+				if addr.IP != nil {
+					ip = string(addr.IP)
+				}
+			}
+
 			if ip != "" {
 				rr, err := dns.NewRR(fmt.Sprintf("%s A %s", q.Name, ip))
 				if err == nil {
