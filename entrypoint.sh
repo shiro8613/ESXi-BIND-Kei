@@ -6,7 +6,7 @@ MODIFIED_DOMAIN=`echo $(echo ${DOMAIN_NAME} | sed -e 's/{{/${/g' -e 's/}}/}/g')`
 
 cd /data
 
-cat << EOF > /config.yml
+cat << EOF > config.yml
 port: $MODIFIED_PORT
 esxi_addr: $MODIFIED_IP
 domain_name: $MODIFIED_DOMAIN
