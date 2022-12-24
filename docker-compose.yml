@@ -1,0 +1,11 @@
+version: "3.8"
+
+services:
+  dns:
+    build: . 
+    environment:
+      BIND_PORT: 53
+      ESXI_IP: 192.168.1.6
+      DOMAIN_NAME: esxi.kei.local.
+    ports:
+      - "53:53"
