@@ -1,4 +1,4 @@
-version: "3.8"
+version: "3.3"
 
 services:
   dns:
@@ -9,3 +9,5 @@ services:
       DOMAIN_NAME: esxi.kei.local.
     ports:
       - "53:53"
+    restart: always
+    
